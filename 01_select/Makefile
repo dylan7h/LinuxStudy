@@ -1,11 +1,13 @@
 #============================================================
 # Target Definition 
 #============================================================
-TARGET		:= 01_select
-FILE_EXT 	:= out
-BUILD_MODE	:= Release
+TARGET		:= 01_select	# Target Name
+FILE_EXT 	:= out			# out | exe
 
-VERBOSE		:= 0
+BUILD_MODE	:= Release		# Release | Debug
+BUILD_ARCH	:= x86			# x86 | x64
+
+VERBOSE		:= 0			# 0 | 1
 
 #============================================================
 # Include Build Environments
