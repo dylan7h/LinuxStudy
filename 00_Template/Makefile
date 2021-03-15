@@ -1,13 +1,16 @@
 #============================================================
 # Target Definition 
 #============================================================
-TARGET		:= 00_Tempalte	# Target Name
-FILE_EXT 	:= out			# out | exe
-
-BUILD_MODE	:= Release		# Release | Debug
-BUILD_ARCH	:= x86			# x86 | x64
-
-VERBOSE		:= 0			# 0 | 1
+# Target Name
+TARGET		:= $(notdir $(CURDIR))
+# out | exe
+FILE_EXT 	:= out
+# Release | Debug
+BUILD_MODE	:= Debug
+# x86 | x64
+BUILD_ARCH	:= x86
+# 0 | 1
+VERBOSE		:= 0
 
 #============================================================
 # Include Build Environments
