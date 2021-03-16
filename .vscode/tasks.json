@@ -11,9 +11,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [ "relative", "${workspaceFolder}/${config:BUILD_TARGET}" ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -30,9 +31,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [ "relative", "${workspaceFolder}/${config:BUILD_TARGET}" ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -49,9 +51,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [ "relative", "${workspaceFolder}/${config:BUILD_TARGET}" ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -68,9 +71,10 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [ "relative", "${workspaceFolder}/${config:BUILD_TARGET}" ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
