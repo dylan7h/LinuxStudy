@@ -1,3 +1,7 @@
 {
-    "BUILD_TARGET": "01_select"
+    "BUILD_TARGET": "02_poll",
+    "files.associations": {
+        "errno.h": "c",
+        "stdio.h": "c"
+    }
 }
