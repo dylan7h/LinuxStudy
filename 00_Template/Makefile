@@ -12,6 +12,15 @@ BUILD_ARCH	:= x86
 # 0 | 1
 VERBOSE		:= 0
 
+
+#============================================================
+# Target Definition 
+#============================================================
+ifeq ($(VERBOSE), 0)
+	V := @
+endif
+
+
 #============================================================
 # Include Build Environments
 #============================================================
@@ -29,20 +38,12 @@ all: $(DEPS) $(ASM_DIR)/$(TARGET).asm
 # Clean Target
 #============================================================
 clean:
-ifeq ($(VERBOSE), 1)
-	rm -rf $(OBJ_DIR)/*
-	rm -rf $(DEF_DIR)/*
-	rm -rf $(ASM_DIR)/$(TARGET).asm
-	rm -rf $(MAP_DIR)/$(TARGET).map
-	rm -rf $(EXE_DIR)/$(TARGET).$(FILE_EXT)
-else
 	@printf "%-10s Product of $(TARGET)\n" "RM" 
-	@rm -rf $(OBJ_DIR)/*
-	@rm -rf $(DEF_DIR)/*
-	@rm -rf $(ASM_DIR)/$(TARGET).asm
-	@rm -rf $(MAP_DIR)/$(TARGET).map
-	@rm -rf $(EXE_DIR)/$(TARGET).$(FILE_EXT)
-endif
+	$(V)rm -rf $(OBJ_DIR)/*
+	$(V)rm -rf $(DEF_DIR)/*
+	$(V)rm -rf $(ASM_DIR)/$(TARGET).asm
+	$(V)rm -rf $(MAP_DIR)/$(TARGET).map
+	$(V)rm -rf $(EXE_DIR)/$(TARGET).$(FILE_EXT)
 
 
 #============================================================
@@ -59,12 +60,8 @@ $(EXE_DIR)/$(TARGET).$(FILE_EXT): $(OBJS)
 	@mkdir -p $(EXE_DIR)
 	@mkdir -p $(MAP_DIR)
 	@mkdir -p $(ASM_DIR)
-ifeq ($(VERBOSE), 1)
-	$(LD) -o $@ $< $(LDFLAGS) -Xlinker -Map=$(MAP_DIR)/$(TARGET).map $(LIB_DIR) $(LIBS)
-else
 	@printf "%-10s $@\n" "LD" 
-	@$(LD) -o $@ $< $(LDFLAGS) -Xlinker -Map=$(MAP_DIR)/$(TARGET).map $(LIB_DIR) $(LIBS)
-endif
+	$(V)$(LD) -o $@ $< $(LDFLAGS) -Xlinker -Map=$(MAP_DIR)/$(TARGET).map $(LIB_DIR) $(LIBS)
 
 
 #============================================================
@@ -72,12 +69,8 @@ endif
 #============================================================
 $(ASM_DIR)/$(TARGET).asm: $(EXE_DIR)/$(TARGET).$(FILE_EXT) 
 	@mkdir -p $(ASM_DIR)
-ifeq ($(VERBOSE), 1)
-	$(OBJDUMP) -d $(EXE_DIR)/$(TARGET).$(FILE_EXT) > $(ASM_DIR)/$(TARGET).asm
-else
 	@printf "%-10s $@\n" "OBJCOPY" 
-	@$(OBJDUMP) -d $(EXE_DIR)/$(TARGET).$(FILE_EXT) > $(ASM_DIR)/$(TARGET).asm
-endif
+	$(V)$(OBJDUMP) -d $(EXE_DIR)/$(TARGET).$(FILE_EXT) > $(ASM_DIR)/$(TARGET).asm
 
 
 #============================================================
@@ -86,16 +79,12 @@ endif
 # From *.c files
 $(DEF_DIR)/%.d: %.c
 	@mkdir -p $(dir $@)
-ifeq ($(VERBOSE), 1)
-	$(CC) $(INCS) $(CFLAGS) -M $< > $@
-endif
+	$(V)$(CC) $(INCS) $(CFLAGS) -M $< > $@
 
 # From *.cpp files
 $(DEF_DIR)/%.d: %.cpp
 	@mkdir -p $(dir $@)
-ifeq ($(VERBOSE), 1)
-	$(CXX) $(INCS) $(CXXFLAGS) -M $< > $@
-endif
+	$(V)$(CXX) $(INCS) $(CXXFLAGS) -M $< > $@
 
 
 #============================================================
@@ -104,19 +93,12 @@ endif
 # From *.c files
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-ifeq ($(VERBOSE), 1)
-	$(CC) $(INCS) $(CFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
-else
 	@printf "%-10s $<\n" "CC" 
-	@$(CC) $(INCS) $(CFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
-endif
+	$(V)$(CC) $(INCS) $(CFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
 
 # From *.cpp files
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-ifeq ($(VERBOSE), 1)
-	$(CC) $(INCS) $(CFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
-else
 	@printf "%-10s $<\n" "CXX" 
-	@$(CXX) $(INCS) $(CXXFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
-endif
+	$(V)$(CXX) $(INCS) $(CXXFLAGS) -c $< -o $@ -MMD -MF $(DEF_DIR)/$*.d
+

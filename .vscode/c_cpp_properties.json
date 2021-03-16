@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/01_select/**"
+                "${workspaceFolder}/${config:BUILD_TARGET}/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

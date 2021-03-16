@@ -21,6 +21,11 @@ CFLAGS		+= -O2
 CXXFLAGS	+= -O2
 endif
 
+ifeq ($(BUILD_MODE), Debug)
+CFLAGS		+= -g
+CXXFLAGS	+= -g
+endif
+
 ifeq ($(BUILD_ARCH), x64)
 LDFLAGS		+= -m64
 CFLAGS		+= -m64
