@@ -21,6 +21,25 @@
         },
         {
             "type": "shell",
+            "label": "Run",
+            "command": "make",
+            "args": [
+                "TARGET=${config:BUILD_TARGET}",
+                "run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
             "label": "Clean",
             "command": "make",
             "args": [
